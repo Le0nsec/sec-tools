@@ -1,0 +1,26 @@
+version: "3"
+services:
+  database:
+    image: postgres:11.6-alpine
+    environment:
+      - POSTGRES_USER=codimd
+      - POSTGRES_PASSWORD=leonsec
+      - POSTGRES_DB=codimd
+    volumes:
+      - "database-data:/var/lib/postgresql/data"
+    restart: always
+  codimd:
+    image: hackmdio/hackmd:2.3.2
+    environment:
+      - CMD_DB_URL=postgres://codimd:leonsec@database/codimd
+      - CMD_USECDN=false
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    volumes:
+      - upload-data:/home/hackmd/app/public/uploads
+    restart: always
+volumes:
+  database-data: {}
+  upload-data: {}

@@ -1,0 +1,9 @@
+version: "2"
+services:
+    rips:
+        build: .
+        restart: always
+        ports: 
+          - "8002:80"
+        volumes:
+          - "./tmp:/tmp"
