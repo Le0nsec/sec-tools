@@ -1,2 +1,2 @@
 # sec-tools
-self sec-tools
+some sec-tools
